@@ -13,13 +13,13 @@ public class WalletTest {
         Wallet wallet = new Wallet();
 
         wallet.add(new Rupee(100));
-        int balance = wallet.balance();
+        Rupee balance = wallet.balance();
 
-        assertThat(balance, is(equalTo(100)));
+        assertThat(balance, is(equalTo(new Rupee(100.0))));
     }
 
     @Test
-    void shouldNotAddBalanceWhenNegativeOrZeroIsAddedToWallet() {
+    void shouldNotAddBalanceWhenNegativeOrZeroIsAddedToWallet() throws InvalidAmountException {
         Wallet wallet = new Wallet();
         assertThrows(InvalidAmountException.class, () -> wallet.add(new Rupee(-100)));
     }
