@@ -1,7 +1,6 @@
 package com.tw.wallet;
 
 import com.tw.exceptions.InvalidAmountException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -53,5 +52,13 @@ class RupeeTest {
         Rupee tenRupee = new Rupee(10);
 
         assertNotEquals(null, tenRupee);
+    }
+
+    @Test
+    void shouldAssertFalseWhenATenRupeeIsComparedToAnotherObject() throws InvalidAmountException {
+        Rupee tenRupee = new Rupee(10);
+        USDollar tenUSDollar = new USDollar(10);
+
+        assertNotEquals(tenUSDollar, tenRupee);
     }
 }
