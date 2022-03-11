@@ -51,7 +51,7 @@ class RupeeTest {
     void shouldAssertFalseWhenATenRupeeIsComparedToNull() throws InvalidAmountException {
         Rupee tenRupee = new Rupee(10);
 
-        assertNotEquals(null, tenRupee);
+        assertNotEquals(tenRupee, null);
     }
 
     @Test
@@ -60,5 +60,15 @@ class RupeeTest {
         USDollar tenUSDollar = new USDollar(10);
 
         assertNotEquals(tenUSDollar, tenRupee);
+    }
+
+    @Test
+    void shouldReturnTenRupeeWhenThreeRupeeAndSevenRupeeIsAdded() throws InvalidAmountException {
+        Rupee threeRupee = new Rupee(3);
+        Rupee sevenRupee = new Rupee(7);
+
+        Rupee tenRupee = threeRupee.add(sevenRupee);
+
+        assertThat(new Rupee(10), is(equalTo(tenRupee)));
     }
 }

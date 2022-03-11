@@ -16,8 +16,12 @@ public class Rupee {
     }
 
     @Override
-    public boolean equals(Object o) {
-        Rupee anotherRupee = (Rupee) o;
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+
+        if (obj.getClass() != Rupee.class) return false;
+
+        Rupee anotherRupee = (Rupee) obj;
         return anotherRupee.value == this.value;
     }
 }
