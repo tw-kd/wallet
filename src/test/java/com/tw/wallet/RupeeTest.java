@@ -55,11 +55,11 @@ class RupeeTest {
     }
 
     @Test
-    void shouldAssertFalseWhenATenRupeeIsComparedToAnotherObject() throws InvalidAmountException {
+    void shouldAssertFalseWhenATenRupeeIsComparedToAnotherType() throws InvalidAmountException {
         Rupee tenRupee = new Rupee(10);
         USDollar tenUSDollar = new USDollar(10);
 
-        assertNotEquals(tenUSDollar, tenRupee);
+        assertNotEquals(tenRupee, tenUSDollar);
     }
 
     @Test
