@@ -2,6 +2,9 @@ package com.tw.wallet;
 
 import com.tw.exceptions.InvalidAmountException;
 
+import java.util.HashMap;
+
+
 public class Rupee {
     private final double value;
 
@@ -19,7 +22,13 @@ public class Rupee {
     public boolean equals(Object obj) {
         if (obj == null) return false;
 
-        if (obj.getClass() != Rupee.class) return false;
+        if (obj.getClass() != Rupee.class) {
+            if (obj.getClass() == USDollar.class) {
+                USDollar usDollar = (USDollar) obj;
+                return this.value / usDollar.value() == 76.0;
+            }
+            return false;
+        }
 
         Rupee anotherRupee = (Rupee) obj;
         return anotherRupee.value == this.value;
