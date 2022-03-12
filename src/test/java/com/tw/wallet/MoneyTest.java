@@ -3,80 +3,89 @@ package com.tw.wallet;
 import com.tw.exceptions.InvalidAmountException;
 import org.junit.jupiter.api.Test;
 
+import static com.tw.wallet.Money.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RupeeTest {
+class MoneyTest {
     @Test
     void shouldReturnValueAsHundredWhenInputIsHundred() throws InvalidAmountException {
-        Rupee rupee = new Rupee(100);
+        Money hundredRupee = createRupee(100);
 
-        assertThat(new Rupee(100), is(equalTo(rupee)));
+        assertThat(createRupee(100), is(equalTo(hundredRupee)));
     }
 
     @Test
     void shouldNotCreateARupeeWhenInputIsNegative() {
-        assertThrows(InvalidAmountException.class, () -> new Rupee(-10));
+        assertThrows(InvalidAmountException.class, () -> createRupee(-10));
     }
 
     @Test
     void shouldReturnFifteenRupeeWhenTenRupeeAndFiveRupeeIsAdded() throws InvalidAmountException {
-        Rupee tenRupee = new Rupee(10);
-        Rupee fiveRupee = new Rupee(5);
+        Money tenRupee = createRupee(10);
+        Money fiveRupee = createRupee(5);
 
-        Rupee fifteenRupee = tenRupee.add(fiveRupee);
+        Money fifteenRupee = tenRupee.add(fiveRupee);
 
-        assertThat(new Rupee(15), is(equalTo(fifteenRupee)));
+        assertThat(createRupee(15), is(equalTo(fifteenRupee)));
     }
 
     @Test
     void shouldAssertNotSameWhenTwoTenRupeesAreCompared() throws InvalidAmountException {
-        Rupee tenRupee = new Rupee(10);
-        Rupee anotherTenRupee = new Rupee(10);
+        Money tenRupee = createRupee(10);
+        Money anotherTenRupee = createRupee(10);
 
         assertNotSame(tenRupee, anotherTenRupee);
     }
 
     @Test
     void shouldAssertTrueWhenTheValueOfTwoTenRupeesAreEqual() throws InvalidAmountException {
-        Rupee tenRupee = new Rupee(10);
-        Rupee anotherTenRupee = new Rupee(10);
+        Money tenRupee = createRupee(10);
+        Money anotherTenRupee = createRupee(10);
 
         assertEquals(tenRupee, anotherTenRupee);
     }
 
     @Test
     void shouldAssertFalseWhenATenRupeeIsComparedToNull() throws InvalidAmountException {
-        Rupee tenRupee = new Rupee(10);
+        Money tenRupee = createRupee(10);
 
         assertNotEquals(tenRupee, null);
     }
 
     @Test
     void shouldAssertFalseWhenATenRupeeIsComparedToAnotherType() throws InvalidAmountException {
-        Rupee tenRupee = new Rupee(10);
-        USDollar tenUSDollar = new USDollar(10);
+        Money tenRupee = createRupee(10);
+        Money tenUSDollar = createUSDollar(10);
 
         assertNotEquals(tenRupee, tenUSDollar);
     }
 
     @Test
     void shouldReturnTenRupeeWhenThreeRupeeAndSevenRupeeIsAdded() throws InvalidAmountException {
-        Rupee threeRupee = new Rupee(3);
-        Rupee sevenRupee = new Rupee(7);
+        Money threeRupee = createRupee(3);
+        Money sevenRupee = createRupee(7);
 
-        Rupee tenRupee = threeRupee.add(sevenRupee);
+        Money tenRupee = threeRupee.add(sevenRupee);
 
-        assertThat(new Rupee(10), is(equalTo(tenRupee)));
+        assertThat(createRupee(10), is(equalTo(tenRupee)));
     }
 
     @Test
     void shouldAssertTrueWhenOneUSDollarIsEqualToSeventySixRupee() throws InvalidAmountException {
-        Rupee seventySixRupee = new Rupee(76);
-        USDollar oneUSDollar = new USDollar(1);
+        Money seventySixRupee = createRupee(76);
+        Money oneUSDollar = createUSDollar(1);
 
         assertEquals(seventySixRupee, oneUSDollar);
+    }
+
+    @Test
+    void shouldAssertTrueWhenOneRupeeIsZeroPointZeroOneTwoEuro() throws InvalidAmountException {
+        Money oneRupee = createRupee(1);
+        Money zeroPointZeroOneTwoEuro = createEuro(0.012);
+
+        assertEquals(oneRupee, zeroPointZeroOneTwoEuro);
     }
 }

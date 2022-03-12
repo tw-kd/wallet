@@ -2,18 +2,20 @@ package com.tw.wallet;
 
 import com.tw.exceptions.InvalidAmountException;
 
+import static com.tw.wallet.Money.createRupee;
+
 public class Wallet {
-    private Rupee balance;
+    private Money balance;
 
     public Wallet() throws InvalidAmountException {
-        balance = new Rupee(0);
+        balance = createRupee(0);
     }
 
-    public void add(Rupee rupee) throws InvalidAmountException {
-        balance = balance.add(rupee);
+    public void add(Money money) throws InvalidAmountException {
+        balance = balance.add(money);
     }
 
-    public Rupee balance() {
+    public Money balance() {
         return balance;
     }
 }
