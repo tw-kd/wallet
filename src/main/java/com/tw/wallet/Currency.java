@@ -14,4 +14,8 @@ public enum Currency {
     public double convertToBaseFactor(double value) {
         return value * baseFactor;
     }
+
+    public double convertToCurrency(double value, Currency requiredCurrency) {
+        return convertToBaseFactor(value) / requiredCurrency.baseFactor;
+    }
 };

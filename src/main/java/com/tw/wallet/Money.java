@@ -3,7 +3,6 @@ package com.tw.wallet;
 import com.tw.exceptions.BalanceNotAvailableException;
 import com.tw.exceptions.InvalidAmountException;
 
-import java.util.HashMap;
 import java.util.Objects;
 
 
@@ -57,5 +56,9 @@ public class Money {
     @Override
     public int hashCode() {
         return Objects.hash(currency.convertToBaseFactor(value));
+    }
+
+    public double value(Currency requiredCurrency) {
+        return currency.convertToCurrency(value, requiredCurrency);
     }
 }

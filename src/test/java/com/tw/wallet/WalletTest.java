@@ -51,4 +51,40 @@ public class WalletTest {
 
         assertThrows(BalanceNotAvailableException.class, () -> wallet.withdraw(twoHundredRupee));
     }
+
+    @Test
+    void shouldReturnUSDollarValueAsOneWhenSeventySixRupeesIsBalance() throws InvalidAmountException {
+        Wallet wallet = new Wallet();
+        Money seventySixRupee = createRupee(76);
+
+        wallet.deposit(seventySixRupee);
+        Money balance = wallet.balance();
+        double valueInUSDollars = balance.value(Currency.USDollar);
+
+        assertThat(valueInUSDollars, is(equalTo(1.0)));
+    }
+
+    @Test
+    void shouldReturnRupeeValueAsSeventySixWhenOneRupeeIsBalance() throws InvalidAmountException {
+        Wallet wallet = new Wallet();
+        Money oneUSDollar = createUSDollar(1);
+
+        wallet.deposit(oneUSDollar);
+        Money balance = wallet.balance();
+        double valueInRupee = balance.value(Currency.Rupee);
+
+        assertThat(valueInRupee, is(equalTo(76.0)));
+    }
+
+    @Test
+    void shouldReturnEuroValueAsZeroPointNineOneTwoWhenOneUSDollarIsBalance() throws InvalidAmountException {
+        Wallet wallet = new Wallet();
+        Money oneUSDollar = createUSDollar(1);
+
+        wallet.deposit(oneUSDollar);
+        Money balance = wallet.balance();
+        double valueInEuro = balance.value(Currency.Euro);
+
+        assertThat(valueInEuro, is(equalTo(0.912)));
+    }
 }
