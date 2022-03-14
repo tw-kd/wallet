@@ -1,5 +1,6 @@
 package com.tw.wallet;
 
+import com.tw.exceptions.BalanceNotAvailableException;
 import com.tw.exceptions.InvalidAmountException;
 import org.junit.jupiter.api.Test;
 
@@ -87,5 +88,15 @@ class MoneyTest {
         Money zeroPointZeroOneTwoEuro = createEuro(0.012);
 
         assertEquals(oneRupee, zeroPointZeroOneTwoEuro);
+    }
+
+    @Test
+    void shouldReturnTenRupeeWhenTwentyRupeesIsSubtractedFromThirtyRupees() throws InvalidAmountException, BalanceNotAvailableException {
+        Money thirtyRupee = createRupee(30);
+        Money twentyRupee = createRupee(20);
+
+        Money tenRupee = thirtyRupee.subtract(twentyRupee);
+
+        assertThat(createRupee(10), is(equalTo(tenRupee)));
     }
 }

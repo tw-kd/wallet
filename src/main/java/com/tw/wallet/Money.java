@@ -1,5 +1,6 @@
 package com.tw.wallet;
 
+import com.tw.exceptions.BalanceNotAvailableException;
 import com.tw.exceptions.InvalidAmountException;
 
 import java.util.HashMap;
@@ -30,7 +31,17 @@ public class Money {
     }
 
     public Money add(Money anotherMoney) throws InvalidAmountException {
-        return new Money(currency.convertToBaseFactor(value) + anotherMoney.currency.convertToBaseFactor(anotherMoney.value), Currency.Rupee);
+        return new Money(getBaseValue(currency, value) + getBaseValue(anotherMoney.currency, anotherMoney.value), Currency.Rupee);
+    }
+
+    private double getBaseValue(Currency currency, double value) {
+        return currency.convertToBaseFactor(value);
+    }
+
+    public Money subtract(Money anotherMoney) throws InvalidAmountException, BalanceNotAvailableException {
+        if (getBaseValue(currency, value) < getBaseValue(anotherMoney.currency, anotherMoney.value))
+            throw new BalanceNotAvailableException();
+        return new Money(getBaseValue(currency, value) - getBaseValue(anotherMoney.currency, anotherMoney.value), Currency.Rupee);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.tw.wallet;
 
+import com.tw.exceptions.BalanceNotAvailableException;
 import com.tw.exceptions.InvalidAmountException;
 
 import static com.tw.wallet.Money.createRupee;
@@ -11,8 +12,12 @@ public class Wallet {
         balance = createRupee(0);
     }
 
-    public void add(Money money) throws InvalidAmountException {
+    public void deposit(Money money) throws InvalidAmountException {
         balance = balance.add(money);
+    }
+
+    public void withdraw(Money money) throws InvalidAmountException, BalanceNotAvailableException {
+        balance = balance.subtract(money);
     }
 
     public Money balance() {
