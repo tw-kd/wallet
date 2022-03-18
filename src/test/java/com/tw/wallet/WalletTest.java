@@ -33,8 +33,8 @@ public class WalletTest {
         Wallet wallet = new Wallet();
         Money fiftyRupee = createRupee(50);
         Money thirtyRupee = createRupee(30);
-
         wallet.deposit(fiftyRupee);
+
         wallet.withdraw(thirtyRupee);
         Money balance = wallet.balance();
 
@@ -53,27 +53,48 @@ public class WalletTest {
     }
 
     @Test
-    void shouldReturnUSDollarValueAsOneWhenSeventySixRupeesIsBalance() throws InvalidAmountException {
+    void shouldReturnBalanceAsSixtySevenWhenTenRupeeIsWithdrawnFromOneUSDollarAndOneRupee() throws InvalidAmountException, BalanceNotAvailableException {
         Wallet wallet = new Wallet();
-        Money seventySixRupee = createRupee(76);
+        Money oneRupee = createRupee(1);
+        Money oneUSDollar = createUSDollar(1);
+        Money tenRupee = createRupee(10);
+        wallet.deposit(oneRupee);
+        wallet.deposit(oneUSDollar);
 
-        wallet.deposit(seventySixRupee);
+        wallet.withdraw(tenRupee);
         Money balance = wallet.balance();
-        double valueInUSDollars = balance.value(Currency.USDollar);
 
-        assertThat(valueInUSDollars, is(equalTo(1.0)));
+        assertThat(balance, is(equalTo(createRupee(67))));
     }
 
     @Test
-    void shouldReturnRupeeValueAsSeventySixWhenOneRupeeIsBalance() throws InvalidAmountException {
+    void shouldReturnUSDollarValueAsFourWhenSeventySixRupeeAndOneUSDollarAndOneHundredFiftyTwoAreBalance() throws InvalidAmountException {
         Wallet wallet = new Wallet();
+        Money seventySixRupee = createRupee(76);
         Money oneUSDollar = createUSDollar(1);
-
+        Money oneHundredFiftyTwoRupee = createRupee(152);
+        wallet.deposit(seventySixRupee);
         wallet.deposit(oneUSDollar);
+        wallet.deposit(oneHundredFiftyTwoRupee);
+
+        Money balance = wallet.balance();
+        double valueInUSDollars = balance.value(Currency.USDollar);
+
+        assertThat(valueInUSDollars, is(equalTo(4.0)));
+    }
+
+    @Test
+    void shouldReturnRupeeValueAsOneHundredTwentySixWhenFiftyRupeeAndOneUSDollarAreBalance() throws InvalidAmountException {
+        Wallet wallet = new Wallet();
+        Money fiftyRupee = createRupee(50);
+        Money oneUSDollar = createUSDollar(1);
+        wallet.deposit(fiftyRupee);
+        wallet.deposit(oneUSDollar);
+
         Money balance = wallet.balance();
         double valueInRupee = balance.value(Currency.Rupee);
 
-        assertThat(valueInRupee, is(equalTo(76.0)));
+        assertThat(valueInRupee, is(equalTo(126.0)));
     }
 
     @Test
