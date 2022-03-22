@@ -17,10 +17,16 @@ public class Wallet {
     }
 
     public void withdraw(Money money) throws InvalidAmountException, BalanceNotAvailableException {
+        if (money.value(Currency.Rupee) > balance.value(Currency.Rupee))
+            throw new BalanceNotAvailableException();
         balance = balance.subtract(money);
     }
 
     public Money balance() {
         return balance;
+    }
+
+    public double valueOfBalance(Currency currency) {
+        return balance.value(currency);
     }
 }

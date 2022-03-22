@@ -77,10 +77,9 @@ public class WalletTest {
         wallet.deposit(oneUSDollar);
         wallet.deposit(oneHundredFiftyTwoRupee);
 
-        Money balance = wallet.balance();
-        double valueInUSDollars = balance.value(Currency.USDollar);
+        double balanceValueInUSDollars = wallet.valueOfBalance(Currency.USDollar);
 
-        assertThat(valueInUSDollars, is(equalTo(4.0)));
+        assertThat(balanceValueInUSDollars, is(equalTo(4.0)));
     }
 
     @Test
@@ -91,10 +90,9 @@ public class WalletTest {
         wallet.deposit(fiftyRupee);
         wallet.deposit(oneUSDollar);
 
-        Money balance = wallet.balance();
-        double valueInRupee = balance.value(Currency.Rupee);
+        double balanceValueInRupee = wallet.valueOfBalance(Currency.Rupee);
 
-        assertThat(valueInRupee, is(equalTo(126.0)));
+        assertThat(balanceValueInRupee, is(equalTo(126.0)));
     }
 
     @Test
@@ -103,9 +101,8 @@ public class WalletTest {
         Money oneUSDollar = createUSDollar(1);
 
         wallet.deposit(oneUSDollar);
-        Money balance = wallet.balance();
-        double valueInEuro = balance.value(Currency.Euro);
+        double balanceValueInEuro = wallet.valueOfBalance(Currency.Euro);
 
-        assertThat(valueInEuro, is(equalTo(0.912)));
+        assertThat(balanceValueInEuro, is(equalTo(0.912)));
     }
 }

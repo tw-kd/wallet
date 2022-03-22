@@ -37,9 +37,7 @@ public class Money {
         return currency.convertToBaseFactor(value);
     }
 
-    public Money subtract(Money anotherMoney) throws InvalidAmountException, BalanceNotAvailableException {
-        if (getBaseValue(currency, value) < getBaseValue(anotherMoney.currency, anotherMoney.value))
-            throw new BalanceNotAvailableException();
+    public Money subtract(Money anotherMoney) throws InvalidAmountException {
         return new Money(getBaseValue(currency, value) - getBaseValue(anotherMoney.currency, anotherMoney.value), Currency.Rupee);
     }
 
