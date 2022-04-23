@@ -12,19 +12,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MoneyTest {
     @Test
-    void shouldReturnValueAsHundredWhenInputIsHundred() throws InvalidAmountException {
+    void shouldBeAbleToCreateMoney() throws InvalidAmountException {
         Money hundredRupee = createRupee(100);
 
         assertThat(createRupee(100), is(equalTo(hundredRupee)));
     }
 
     @Test
-    void shouldNotCreateARupeeWhenInputIsNegative() {
+    void shouldNotBeAbleToCreateMoneyWhenValueIsNegative() {
         assertThrows(InvalidAmountException.class, () -> createRupee(-10));
     }
 
     @Test
-    void shouldReturnFifteenRupeeWhenTenRupeeAndFiveRupeeIsAdded() throws InvalidAmountException {
+    void shouldBeAbleToAddTwoMoney() throws InvalidAmountException {
         Money tenRupee = createRupee(10);
         Money fiveRupee = createRupee(5);
 
@@ -34,7 +34,7 @@ class MoneyTest {
     }
 
     @Test
-    void shouldAssertNotSameWhenTwoTenRupeesAreCompared() throws InvalidAmountException {
+    void shouldAssertNotSameWhenTwoMoneyAreCompared() throws InvalidAmountException {
         Money tenRupee = createRupee(10);
         Money anotherTenRupee = createRupee(10);
 
@@ -42,7 +42,7 @@ class MoneyTest {
     }
 
     @Test
-    void shouldAssertTrueWhenTheValueOfTwoTenRupeesAreEqual() throws InvalidAmountException {
+    void shouldAssertEqualsWhenValueOfTwoMoneyAreSame() throws InvalidAmountException {
         Money tenRupee = createRupee(10);
         Money anotherTenRupee = createRupee(10);
 
@@ -50,28 +50,18 @@ class MoneyTest {
     }
 
     @Test
-    void shouldAssertFalseWhenATenRupeeIsComparedToNull() throws InvalidAmountException {
+    void shouldAssertFalseWhenACurrencyIsComparedToNull() throws InvalidAmountException {
         Money tenRupee = createRupee(10);
 
         assertNotEquals(tenRupee, null);
     }
 
     @Test
-    void shouldAssertFalseWhenATenRupeeIsComparedToAnotherType() throws InvalidAmountException {
+    void shouldAssertFalseWhenACurrencyIsComparedToAnotherCurrency() throws InvalidAmountException {
         Money tenRupee = createRupee(10);
         Money tenUSDollar = createUSDollar(10);
 
         assertNotEquals(tenRupee, tenUSDollar);
-    }
-
-    @Test
-    void shouldReturnTenRupeeWhenThreeRupeeAndSevenRupeeIsAdded() throws InvalidAmountException {
-        Money threeRupee = createRupee(3);
-        Money sevenRupee = createRupee(7);
-
-        Money tenRupee = threeRupee.add(sevenRupee);
-
-        assertThat(createRupee(10), is(equalTo(tenRupee)));
     }
 
     @Test
@@ -91,7 +81,7 @@ class MoneyTest {
     }
 
     @Test
-    void shouldReturnTenRupeeWhenTwentyRupeesIsSubtractedFromThirtyRupees() throws InvalidAmountException, BalanceNotAvailableException {
+    void shouldBeAbleToSubtractTwoMoney() throws InvalidAmountException, BalanceNotAvailableException {
         Money thirtyRupee = createRupee(30);
         Money twentyRupee = createRupee(20);
 

@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class WalletTest {
     @Test
-    void shouldReturnBalanceAsHundredWhenHundredIsDepositedToWallet() throws InvalidAmountException {
+    void shouldBeAbleToDepositMoneyToWallet() throws InvalidAmountException {
         Wallet wallet = new Wallet();
         Money hundredRupee = createRupee(100);
 
@@ -22,14 +22,14 @@ public class WalletTest {
     }
 
     @Test
-    void shouldNotAddBalanceWhenNegativeOrZeroIsDepositedToWallet() throws InvalidAmountException {
+    void shouldNotBeAbleToDepositMoneyToWalletWhenMoneyIsNegativeOrZero() throws InvalidAmountException {
         Wallet wallet = new Wallet();
 
         assertThrows(InvalidAmountException.class, () -> wallet.deposit(createRupee(-100)));
     }
 
     @Test
-    void shouldReturnBalanceAsTwentyWhenThirtyIsWithdrawnFromWalletHavingBalanceFifty() throws InvalidAmountException, BalanceNotAvailableException {
+    void shouldBeAbleToWithdrawnMoneyFromWallet() throws InvalidAmountException, BalanceNotAvailableException {
         Wallet wallet = new Wallet();
         Money fiftyRupee = createRupee(50);
         Money thirtyRupee = createRupee(30);
@@ -42,7 +42,7 @@ public class WalletTest {
     }
 
     @Test
-    void shouldNotBeAbleToWithdrawMoreThanBalanceMoney() throws InvalidAmountException {
+    void shouldNotBeAbleToWithdrawMoreThanBalanceFromWallet() throws InvalidAmountException {
         Wallet wallet = new Wallet();
         Money tenRupee = createRupee(10);
         Money twoHundredRupee = createRupee(200);
@@ -53,7 +53,7 @@ public class WalletTest {
     }
 
     @Test
-    void shouldReturnBalanceAsSixtySevenWhenTenRupeeIsWithdrawnFromOneUSDollarAndOneRupee() throws InvalidAmountException, BalanceNotAvailableException {
+    void shouldReturnBalanceWhenMoneyIsWithdrawnFromWalletWithMultipleTypesOfCurrencies() throws InvalidAmountException, BalanceNotAvailableException {
         Wallet wallet = new Wallet();
         Money oneRupee = createRupee(1);
         Money oneUSDollar = createUSDollar(1);
@@ -68,7 +68,7 @@ public class WalletTest {
     }
 
     @Test
-    void shouldReturnUSDollarValueAsFourWhenSeventySixRupeeAndOneUSDollarAndOneHundredFiftyTwoAreBalance() throws InvalidAmountException {
+    void shouldBeAbleToReturnUSDollarValueFromWalletWithMultipleTypesOfCurrencies() throws InvalidAmountException {
         Wallet wallet = new Wallet();
         Money seventySixRupee = createRupee(76);
         Money oneUSDollar = createUSDollar(1);
@@ -83,7 +83,7 @@ public class WalletTest {
     }
 
     @Test
-    void shouldReturnRupeeValueAsOneHundredTwentySixWhenFiftyRupeeAndOneUSDollarAreBalance() throws InvalidAmountException {
+    void shouldBeAbleToReturnRupeeValueFromWalletWithMultipleTypesOfCurrencies() throws InvalidAmountException {
         Wallet wallet = new Wallet();
         Money fiftyRupee = createRupee(50);
         Money oneUSDollar = createUSDollar(1);
@@ -96,7 +96,7 @@ public class WalletTest {
     }
 
     @Test
-    void shouldReturnEuroValueAsZeroPointNineOneTwoWhenOneUSDollarIsBalance() throws InvalidAmountException {
+    void shouldBeAbleToReturnEuroValueFromWalletWithMultipleTypesOfCurrencies() throws InvalidAmountException {
         Wallet wallet = new Wallet();
         Money oneUSDollar = createUSDollar(1);
 
